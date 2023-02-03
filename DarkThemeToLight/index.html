@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DarkTheme To Light</title>
+  </head>
+  <body>
+    <div onclick="dark()"></div>
+
+    <!-- inline style -->
+    <style>
+      :root {
+        --bgdiv: rgba(7, 7, 7, 0.831);
+        --t: 0px;
+      }
+      body {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      div {
+        width: 100px;
+        height: 50px;
+        border-radius: 50px;
+        border: 5px solid rgb(235, 231, 231);
+        position: relative;
+        background: var(--bgdiv);
+        cursor: pointer;
+      }
+
+      /* pseudo */
+      div::after {
+        position: absolute;
+        content: "";
+        top: 1px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(315deg, #05c9ff, #21b7fc);
+        width: 50px;
+        border-radius: 100%;
+        transition: 0.5s;
+        transform: translateX(var(--t));
+      }
+    </style>
+
+    <script>
+      function dark() {
+        let r = getComputedStyle(document.documentElement);
+        let a = r.getPropertyValue("--t");
+        let root = document.documentElement;
+        if (a == 0 + "px") {
+          root.style.setProperty("--t", 50 + "px");
+          root.style.setProperty("--bgdiv", "#f0f0f0");
+          document.querySelector("body").style.backgroundColor = "black";
+        } else {
+          root.style.setProperty("--t", 0 + "px");
+          root.style.setProperty("--bgdiv", "rgba(7, 7, 7, 0.831)");
+          document.querySelector("body").style.backgroundColor = "white";
+        }
+      }
+    </script>
+  </body>
+</html>
